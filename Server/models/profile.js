@@ -3,91 +3,98 @@ const Schema = mongoose.Schema;
 
 // Create schema
 const ProfileSchema = new Schema({
-    user: {
-        ref: "users"
+    user : {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
     },
     handle: {
         type: String,
-        required: true
+        required: true,
+        max: 40
     },
     company: {
-        type: String,
+        type: String
     },
     website: {
-        type: String,
+        type: String
     },
     location: {
-        type: String,
+        type: String
     },
     status: {
         type: String,
         required: true
     },
     skills: {
-        type: String,
+        type : [String],
+        required: true
     },
-    bio: [{
-        type: String,
-    }],
+    bio: {
+        type: String
+    },
     githubusername: {
-        type: String,
+        type: String
     },
-    experience: {
-        type: String,
-    },
-    title: {
-        type: String,
-        required: true
-    },
-    company: {
-        type: String,
-        required: true
-    },
-    location: {
-        type: String,
-    },
-    from: {
-        type: Date,
-        required: true
-    },
-    to: {
-        type: Date,
-    },
-    current: {
-        type: Boolean,
-    },
-    description: {
-        type: String,
-    },
-
-    education: [{
-        school: {
-            type: String,
-            required: true
-        },
-        degree: {
-            type: String,
-            required: true
-        },
-        fieldofstudy: {
-            type: String,
-            required: true
-        },
-        from: {
-            type: Date,
-            required: true
-        },
-        to: {
-            type: Date,
-        },
-        current: {
-            type: Boolean,
-        },
-        description: {
-            type: String,
-        },
-    }],
-    Social: [{
+    experience: [
+        {
+            title: {
+                type: String,
+                required: true
+            },
+            company: {
+                type: String,
+                required: true
+            },
+            location: {
+                type: String
+            },
+            from: {
+                type: Date,
+                required: true
+            },
+            to: {
+                type: Date
+            },
+            current: {
+                type: Boolean,
+                default: false
+            },
+            description: {
+                type: String
+            }
+        }
+    ],
+    education: [
+        {
+            school: {
+                type: String,
+                required: true
+            },
+            degre: {
+                type: String,
+                required: true
+            },
+            fieldofstudy: {
+                type: String,
+                required: true
+            },
+            from: {
+                type: Date,
+                required: true
+            },
+            to: {
+                type: Date
+            },
+            current: {
+                type: Boolean,
+                default: false
+            },
+            description: {
+                type: String
+            }
+        }
+    ],
+    social: {
         youtube: {
             type: String,
         },
@@ -97,16 +104,17 @@ const ProfileSchema = new Schema({
         facebook: {
             type: String,
         },
-        instagram: {
-            type: String,
-        },
         linkedin: {
             type: String,
         },
-    }],
+        instagram: {
+            type: String,
+        }
+    },
     date: {
         type: Date,
+        default: Date.now
     }
 });
 
-module.exports = User = mongoose.model('users', UserSchema);
+module.exports = Profile = mongoose.model('profile', ProfileSchema);

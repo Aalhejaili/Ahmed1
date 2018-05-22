@@ -3,25 +3,54 @@ const Schema = mongoose.Schema;
 
 // Create schema
 const PostSchema = new Schema({
-    user: {
-        type: Schema.Types.Objected,
-        ref: "users"
+    user : {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
     },
-    text: {
+    text : {
         type: String,
         required: true
     },
     name: {
-        type: String,
+        type: String
     },
     avatar: {
         type: String
-        //required: true // getting from gravatar
     },
+    likes: [
+        {
+            user: {
+                type: Schema.Types.ObjectId,
+                ref: 'users'
+            }
+        }
+    ],
+    comments: [
+        {
+            user: {
+                type: Schema.Types.ObjectId,
+                ref: 'users'
+            },
+            text: {
+                type: String,
+                required: true
+            },
+            name: {
+                type: String
+            },
+            avatar: {
+                type: String
+            },
+            date: {
+                type: Date,
+                default: Date.now()
+            }
+        }
+    ],
     date: {
         type: Date,
-        default: Date.now
+        default: Date.now()
     }
 });
 
-module.exports = User = mongoose.model('users', UserSchema);
+module.exports = Post = mongoose.model('post', PostSchema);
